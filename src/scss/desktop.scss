@@ -1,3 +1,116 @@
 @media screen and (min-width: 769px) {
-  
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+  body {
+    margin: 10px;
+  }
+
+  #container {
+    display: flex;
+    justify-content: center;
+    transform-style: preserve-3d;
+  }
+
+  #item-1, #item-2, #item-3, #item-4 {
+    display: none;
+  }
+
+  .calculator-wrap {
+    border: 1px solid #1e2b4e;
+    border-radius: 10px;
+    padding: 20px;
+    position: absolute;
+    transition: transform 0.4s ease;
+
+    input {
+      width: 300px;
+      height: 50px;
+      border: 1px solid #1e2b4e;
+      border-radius: 10px;
+      padding: 10px;
+      box-sizing: border-box;
+      outline: none;
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      color: #1e2b4e;
+      transition: 0.4s;
+    }
+
+    input:focus {
+      border-color: #007cba;
+    }
+
+    .viewport-label, .size-label {
+      padding: 0 5px 0 5px;
+      position: absolute;
+      top: -7px;
+      left: 15px;
+      font-family: 'Roboto', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      color: #1e2b4e;
+      background-color: #ffffff;
+    }
+
+    button {
+      width: 300px;
+      height: 50px;
+      border: none;
+      border-radius: 10px;
+      background-color: #1e2b4e;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      transition: 0.4s;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3a9cf7;
+    }
+  }
+
+  .viewport-wrap, .size-wrap {
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .result-wrap {
+    padding: 10px 10px 0 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #1e2b4e;
+    }
+  }
+
+  #item-1:checked ~ #card-3, #item-2:checked ~ #card-1, #item-3:checked ~ #card-4, #item-4:checked ~ #card-2 {
+    transform: translatex(-40%) scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #item-1:checked ~ #card-2, #item-2:checked ~ #card-4, #item-3:checked ~ #card-1, #item-4:checked ~ #card-3 {
+    transform: translatex(40%) scale(0.8);
+    opacity: 0.4;
+    z-index: 0;
+  }
+
+  #item-1:checked ~ #card-1, #item-2:checked ~ #card-2, #item-3:checked ~ #card-3, #item-4:checked ~ #card-4 {
+    transform: translatex(0) scale(1);
+    opacity: 1;
+    z-index: 1;
+  }
+
+  #item-1:checked ~ #card-4, #item-2:checked ~ #card-3, #item-3:checked ~ #card-2, #item-4:checked ~ #card-1 {
+    transform: translatex(0) scale(0.8);
+    opacity: 1;
+    z-index: -1;
+  }
 }
