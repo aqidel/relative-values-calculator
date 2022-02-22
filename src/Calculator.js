@@ -1,19 +1,22 @@
 import React, { useState } from 'react';
 
 export default function Calculator(props) {
-  const [input, setInput] = useState({
-    size: 0,
-    value: 0
+  const [state, setState] = useState({
+    size: null,
+    value: null,
+    result: null
   });
-
-  const [result, setResult] = useState(null);
 
   function handler() {
     if (props.size == 'px') {
-      setResult(input.value / input.size * 100);
+      setState({...state, result: state.value / state.size * 100});
     } else {
-      setResult(input.value / 100 * input.size);
+      setState({...state, result: state.value / 100 * state.size});
     }
+  }
+
+  function clear() {
+    setState({size: null, value: null, result: null})
   }
 
   return (
@@ -26,7 +29,8 @@ export default function Calculator(props) {
         <input 
           className='viewport-input' 
           type='text'
-          onChange={(e) => setInput({...input, size: e.target.value})}
+          value={state.size}
+          onChange={(e) => setState({...state, size: e.target.value})}
           disabled={props.active[5] == props.id ? false : true}/>
         <label 
           className='viewport-label'
@@ -38,7 +42,8 @@ export default function Calculator(props) {
         <input 
           className='size-input'
           type='text'
-          onChange={(e) => setInput({...input, value: e.target.value})}
+          value={state.value}
+          onChange={(e) => setState({...state, value: e.target.value})}
           disabled={props.active[5] == props.id ? false : true}/>
         <label 
           className='size-label'
@@ -51,10 +56,18 @@ export default function Calculator(props) {
         className='convert-button'
         value='CONVERT'
         onClick={() => handler()}
-        disabled={props.active[5] == props.id ? false : true}/>
-      {result ?
+        disabled={props.active[5] == props.id ? false : true}
+      />
+      <input
+        type='button'
+        className='clear-button'
+        value='CLEAR'
+        onClick={() => clear()}
+        disabled={props.active[5] == props.id ? false : true}
+      />
+      {state.result ?
         <div className='result-wrap'>
-          <span>{result}</span>
+          <span>{state.result}</span>
         </div>
       : null}
     </label>

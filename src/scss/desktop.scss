@@ -56,11 +56,13 @@
       color: #1e2b4e;
     }
 
-    .convert-button {
+    .convert-button, .clear-button {
       width: 300px;
       height: 50px;
+      margin-bottom: 10px;
       border: none;
       border-radius: 10px;
+      display: block;
       background-color: #1e2b4e;
       font-family: 'Roboto', sans-serif;
       font-size: 14px;
@@ -76,6 +78,18 @@
 
     .convert-button:disabled {
       background-color: #1e2b4e;
+    }
+
+    .clear-button {
+      background-color: #ff3333;
+    }
+
+    .clear-button:hover {
+      background-color: #ff6666;
+    }
+
+    .clear-button:disabled {
+      background-color: #ff3333;
     }
   }
 
