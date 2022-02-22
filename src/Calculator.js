@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function Calculator(props) {
+  const [input, setInput] = useState({
+    size: 0,
+    value: 0
+  });
+
+  const [result, setResult] = useState(null);
+
+  function handler() {
+    if (props.size == 'px') {
+      setResult(input.value / input.size * 100);
+    } else {
+      setResult(input.value / 100 * input.size);
+    }
+  }
+
   return (
     <label 
       htmlFor={'item-' + props.id}
@@ -11,6 +26,7 @@ export default function Calculator(props) {
         <input 
           className='viewport-input' 
           type='text'
+          onChange={(e) => setInput({...input, size: e.target.value})}
           disabled={props.active[5] == props.id ? false : true}/>
         <label 
           className='viewport-label'
@@ -22,6 +38,7 @@ export default function Calculator(props) {
         <input 
           className='size-input'
           type='text'
+          onChange={(e) => setInput({...input, value: e.target.value})}
           disabled={props.active[5] == props.id ? false : true}/>
         <label 
           className='size-label'
@@ -33,10 +50,13 @@ export default function Calculator(props) {
         type='button'
         className='convert-button'
         value='CONVERT'
+        onClick={() => handler()}
         disabled={props.active[5] == props.id ? false : true}/>
-      <div className='result-wrap'>
-        <span>NaN</span>
-      </div>
+      {result ?
+        <div className='result-wrap'>
+          <span>{result}</span>
+        </div>
+      : null}
     </label>
   )
 }
