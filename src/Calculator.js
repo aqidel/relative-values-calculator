@@ -40,6 +40,7 @@ export default function Calculator(props) {
       id={'card-' + props.id} 
       className='calculator-wrap'
       style={{backgroundColor: props.color}}>
+      <p className='calculator-header'>{'Convert ' + props.size + ' to ' + props.result}</p>
       <div className='viewport-wrap'>
         <input 
           className='viewport-input' 
@@ -83,7 +84,7 @@ export default function Calculator(props) {
       />
       {state.result ?
         <div className='result-wrap'>
-          <span>{state.result}</span>
+          <span>{state.result + ` ${props.result}`}</span>
         </div>
       : null}
     </label>
