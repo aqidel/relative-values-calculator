@@ -2,12 +2,26 @@ import React, { useState } from 'react';
 
 export default function Calculator(props) {
   const [state, setState] = useState({
-    size: null,
-    value: null,
+    size: '',
+    value: '',
     result: null
   });
 
-  function handler() {
+  const [typeWarning, setTypeWarning] = useState(false);
+
+  function typeChecker() {
+    if (typeof state.size !== 'number' || state.size.length == 0) {
+      setTypeWarning(true);
+    }
+    if (typeof state.value !== 'number' || state.value.length == 0) {
+      setTypeWarning(true);
+    } else {
+      setTypeWarning(false);
+      convertHandler();
+    }
+  }
+
+  function convertHandler() {
     if (props.size == 'px') {
       setState({...state, result: state.value / state.size * 100});
     } else {
@@ -16,7 +30,8 @@ export default function Calculator(props) {
   }
 
   function clear() {
-    setState({size: null, value: null, result: null})
+    setState({size: '', value: '', result: null});
+    setTypeWarning(false);
   }
 
   return (
@@ -50,12 +65,13 @@ export default function Calculator(props) {
           style={{background: `linear-gradient(to bottom, ${props.color} 60%, #ffffff 40%)`}}>
             size in {props.size}
         </label>
+        {typeWarning ? <sub className='wrong-type-text'>Only non-empty numbers allowed!</sub> : null}
       </div>
       <input 
         type='button'
         className='convert-button'
         value='CONVERT'
-        onClick={() => handler()}
+        onClick={() => typeChecker()}
         disabled={props.active[5] == props.id ? false : true}
       />
       <input

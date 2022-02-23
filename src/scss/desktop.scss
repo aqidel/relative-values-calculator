@@ -91,6 +91,15 @@
     .clear-button:disabled {
       background-color: #ff3333;
     }
+
+    .wrong-type-text {
+      margin: 0;
+      display: block;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 700;
+      text-align: center;
+      color: #ff0000;
+    }
   }
 
   .viewport-wrap, .size-wrap {
